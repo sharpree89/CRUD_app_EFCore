@@ -103,23 +103,29 @@ namespace entity1
             int new_id = Int32.Parse(id);
             User RetrievedUser = db.Users.SingleOrDefault(user => user.id == new_id);
 
-            Console.WriteLine("Are you SURE you want to delete " + RetrievedUser.name + " ? Type 'Y' or 'N'");
-            string answer = Console.ReadLine();
-            if(answer == "Y")
+            if(RetrievedUser != null)
             {
-                Console.WriteLine("Deleting " + RetrievedUser.name + " ... ");
-                db.Users.Remove(RetrievedUser);
-                db.SaveChanges();
-                Console.WriteLine("The user has been deleted!");
+                Console.WriteLine("Are you SURE you want to delete " + RetrievedUser.name + " ? Type 'Y' or 'N'");
+                string answer = Console.ReadLine();
+                if(answer == "Y")
+                {
+                    Console.WriteLine("Deleting " + RetrievedUser.name + " ... ");
+                    db.Users.Remove(RetrievedUser);
+                    db.SaveChanges();
+                    Console.WriteLine("The user has been deleted!");
+                }
+                else if(answer != "Y" && answer != "N")
+                {
+                    Console.WriteLine("Invalid entry - type 'Y' or 'N' to continue");
+                    Delete(db);
+                }
+                else if(answer == "N")
+                {
+                    Console.WriteLine(RetrievedUser.name + " will not be deleted. Goodbye!");
+                }
             }
-            else if(answer != "Y" && answer != "N")
-            {
-                Console.WriteLine("Invalid entry - type 'Y' or 'N' to continue");
-                Delete(db);
-            }
-            else if(answer == "N")
-            {
-                Console.WriteLine(RetrievedUser.name + " will not be deleted. Goodbye!");
+            else{
+                Console.WriteLine("Sorry, that user does not exist.");
             }
         }
         public static void Main(string[] args)
@@ -130,7 +136,7 @@ namespace entity1
                 // ReadOne(db);
                 // ReadAll(db);
                 // Update(db);
-                Delete(db);
+                // Delete(db);
             }
         }
     }
