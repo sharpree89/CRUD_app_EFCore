@@ -114,7 +114,8 @@ namespace entity1
             }
             else if(answer != "Y" && answer != "N")
             {
-                Console.WriteLine("Type 'Y' or 'N' to continue.");
+                Console.WriteLine("Invalid entry - type 'Y' or 'N' to continue");
+                Delete(db);
             }
             else if(answer == "N")
             {
@@ -127,9 +128,9 @@ namespace entity1
             {
                 // Create(db);
                 // ReadOne(db);
-                ReadAll(db);
+                // ReadAll(db);
                 // Update(db);
-                // Delete(db);
+                Delete(db);
             }
         }
     }
