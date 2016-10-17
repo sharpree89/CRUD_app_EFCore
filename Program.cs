@@ -30,7 +30,7 @@ namespace entity1
             db.SaveChanges();
             Console.WriteLine(NewUser.name + " has been added to the database.");
         }
-        public static void Read(YourContext db)
+        public static void ReadOne(YourContext db)
         {
             Console.WriteLine("Enter the id of the user you wish to view: ");
             string id = Console.ReadLine();
@@ -47,6 +47,21 @@ namespace entity1
             else
             {
                 Console.WriteLine("Sorry, that user does not exist!");
+            }
+        }
+        public static void ReadAll(YourContext db)
+        {
+            Console.WriteLine("Retrieving all users from the database ... ");
+            
+            var allUsers = db.Users;
+
+            foreach (var user in allUsers)
+            {
+                Console.WriteLine("Name: " + user.name);
+                Console.WriteLine("Email: " + user.email);
+                Console.WriteLine("Password: TOP SECRET!!!");
+                Console.WriteLine("Age: " + user.age);
+                Console.WriteLine("----------------------");
             }
         }
         public static void Update(YourContext db)
@@ -111,9 +126,10 @@ namespace entity1
             using(var db = new YourContext())
             {
                 // Create(db);
-                // Read(db);
+                // ReadOne(db);
+                ReadAll(db);
                 // Update(db);
-                Delete(db);
+                // Delete(db);
             }
         }
     }
